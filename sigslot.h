@@ -227,7 +227,7 @@ public:
     {
         connect(pclass, &signal1<a1_t>::operator());
     }
-    _signal_base0::connect;
+    using _signal_base0::connect;
 };
 
 template <class a1_t>
@@ -296,7 +296,7 @@ public:
     template <class Dest_t, class dest_t, class ret_t>
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t, a2_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(
             new _connection2<Dest_t, ret_t, a1_t, a2_t>(pclass, pmemfun));
     }
@@ -311,7 +311,7 @@ public:
     {
         connect(pclass, &signal2<a1_t, a2_t>::operator());
     }
-    _signal_base1<a1_t>::connect;
+    using _signal_base1<a1_t>::connect;
 };
 
 template <class a1_t, class a2_t>
@@ -383,7 +383,7 @@ public:
     template <class Dest_t, class dest_t, class ret_t>
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(
             new _connection3<Dest_t, ret_t, a1_t, a2_t, a3_t>(pclass, pmemfun));
     }
@@ -399,7 +399,7 @@ public:
     {
         connect(pclass, &signal3<a1_t, a2_t, a3_t>::operator());
     }
-    _signal_base2<a1_t, a2_t>::connect;
+    using _signal_base2<a1_t, a2_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t>
@@ -476,7 +476,7 @@ public:
     void connect(Dest_t *pclass,
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(
             new _connection4<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t>(pclass, pmemfun));
@@ -494,7 +494,7 @@ public:
     {
         connect(pclass, &signal4<a1_t, a2_t, a3_t, a4_t>::operator());
     }
-    _signal_base3<a1_t, a2_t, a3_t>::connect;
+    using _signal_base3<a1_t, a2_t, a3_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t, class a4_t>
@@ -575,7 +575,7 @@ public:
     void connect(Dest_t *pclass,
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t, a5_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(
             new _connection5<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t, a5_t>(pclass, pmemfun));
@@ -593,7 +593,7 @@ public:
     {
         connect(pclass, &signal5<a1_t, a2_t, a3_t, a4_t, a5_t>::operator());
     }
-    _signal_base4<a1_t, a2_t, a3_t, a4_t>::connect;
+    using _signal_base4<a1_t, a2_t, a3_t, a4_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t>
@@ -680,7 +680,7 @@ public:
     void connect(Dest_t *pclass,
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t, a5_t, a6_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(new _connection6<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>(pclass, pmemfun));
     }
@@ -697,7 +697,7 @@ public:
     {
         connect(pclass, &signal6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>::operator());
     }
-    _signal_base5<a1_t, a2_t, a3_t, a4_t, a5_t>::connect;
+    using _signal_base5<a1_t, a2_t, a3_t, a4_t, a5_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t, class a6_t>
@@ -793,7 +793,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t,
         a2_t, a3_t, a4_t, a5_t, a6_t, a7_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(new _connection7<Dest_t, ret_t, a1_t, a2_t,
             a3_t, a4_t, a5_t, a6_t, a7_t>(pclass, pmemfun));
     }
@@ -811,7 +811,7 @@ public:
         connect(pclass, &signal7<a1_t, a2_t, a3_t, a4_t,
             a5_t, a6_t, a7_t>::operator());
     }
-    _signal_base6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>::connect;
+    using _signal_base6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t, class a4_t,
@@ -915,7 +915,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t,
         a2_t, a3_t, a4_t, a5_t, a6_t, a7_t, a8_t))
     {
-        _connect_to_has_slots(pclass);
+        this->_connect_to_has_slots(pclass);
         this->m_connected_slots.push_back(new _connection8<Dest_t, ret_t, a1_t, a2_t,
             a3_t, a4_t, a5_t, a6_t, a7_t, a8_t>(pclass, pmemfun));
     }
@@ -934,7 +934,7 @@ public:
         connect(pclass, &signal8<a1_t, a2_t, a3_t, a4_t,
             a5_t, a6_t, a7_t, a8_t>::operator());
     }
-    _signal_base7<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t>::connect;
+    using _signal_base7<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t>::connect;
 };
 
 template <class a1_t, class a2_t, class a3_t, class a4_t,
