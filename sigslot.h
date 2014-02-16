@@ -34,8 +34,8 @@ private:
     {
         m_senders.erase(sender);
     }
-	typedef std::set<_signal_base *> sender_set;
-	sender_set m_senders;
+    typedef std::set<_signal_base *> sender_set;
+    sender_set m_senders;
 };
 
 class _connection_base
@@ -98,8 +98,8 @@ inline has_slots::~has_slots()
 class _connection_base0 : public _connection_base
 {
 public:
-	_connection_base0() : _connection_base(0) {}
-	virtual void operator()() const = 0;
+    _connection_base0() : _connection_base(0) {}
+    virtual void operator()() const = 0;
 };
 
 template <class dest_t, class ret_t>
@@ -111,10 +111,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()() const
-	{
-	    (m_pobject->*m_pmemfun)();
-	}
+    virtual void operator()() const
+    {
+        (m_pobject->*m_pmemfun)();
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -157,10 +157,10 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -177,8 +177,8 @@ template <class a1_t>
 class _connection_base1 : public _connection_base
 {
 public:
-	_connection_base1() : _connection_base(1) {}
-	virtual void operator()(a1_t a1) const = 0;
+    _connection_base1() : _connection_base(1) {}
+    virtual void operator()(a1_t a1) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t>
@@ -190,10 +190,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1) const
-	{
-	    (m_pobject->*m_pmemfun)(a1);
-	}
+    virtual void operator()(a1_t a1) const
+    {
+        (m_pobject->*m_pmemfun)(a1);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -242,13 +242,13 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -260,8 +260,8 @@ template <class a1_t, class a2_t>
 class _connection_base2 : public _connection_base
 {
 public:
-	_connection_base2() : _connection_base(2) {}
-	virtual void operator()(a1_t a1, a2_t a2) const = 0;
+    _connection_base2() : _connection_base(2) {}
+    virtual void operator()(a1_t a1, a2_t a2) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t>
@@ -273,10 +273,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2);
-	}
+    virtual void operator()(a1_t a1, a2_t a2) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -326,16 +326,16 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -347,8 +347,8 @@ template <class a1_t, class a2_t, class a3_t>
 class _connection_base3 : public _connection_base
 {
 public:
-	_connection_base3() : _connection_base(3) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const = 0;
+    _connection_base3() : _connection_base(3) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t, class a3_t>
@@ -360,10 +360,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -414,11 +414,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -426,7 +426,7 @@ public:
                 (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -438,8 +438,8 @@ template <class a1_t, class a2_t, class a3_t, class a4_t>
 class _connection_base4 : public _connection_base
 {
 public:
-	_connection_base4() : _connection_base(4) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const = 0;
+    _connection_base4() : _connection_base(4) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t, class a3_t, class a4_t>
@@ -452,10 +452,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3, a4);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3, a4);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -509,11 +509,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -524,7 +524,7 @@ public:
                 (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -536,8 +536,8 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t>
 class _connection_base5 : public _connection_base
 {
 public:
-	_connection_base5() : _connection_base(5) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const = 0;
+    _connection_base5() : _connection_base(5) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t,
@@ -551,10 +551,10 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -608,11 +608,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -627,7 +627,7 @@ public:
                     a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -639,9 +639,9 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t, class a6_t
 class _connection_base6 : public _connection_base
 {
 public:
-	_connection_base6() : _connection_base(6) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6) const = 0;
+    _connection_base6() : _connection_base(6) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t,
@@ -655,11 +655,11 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -713,11 +713,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -736,7 +736,7 @@ public:
                     a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -749,9 +749,9 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base7 : public _connection_base
 {
 public:
-	_connection_base7() : _connection_base(7) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6, a7_t a7) const = 0;
+    _connection_base7() : _connection_base(7) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6, a7_t a7) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t,
@@ -766,11 +766,11 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6, a7_t a7) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6, a7_t a7) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -829,11 +829,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -856,7 +856,7 @@ public:
                     a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
@@ -869,9 +869,9 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base8 : public _connection_base
 {
 public:
-	_connection_base8() : _connection_base(8) {}
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const = 0;
+    _connection_base8() : _connection_base(8) {}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t,
@@ -886,11 +886,11 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-	virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
-	    a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const
-	{
-	    (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7, a8);
-	}
+    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+        a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const
+    {
+        (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7, a8);
+    }
     virtual has_slots *dest() const
     {
         return m_pobject;
@@ -952,11 +952,11 @@ public:
             switch ((*i)->argc())
             {
             case 0:
-            	(*(_connection_base0 *)(*i))();
-            	break;
+                (*(_connection_base0 *)(*i))();
+                break;
             case 1:
-            	(*(_connection_base1<a1_t> *)(*i))(a1);
-            	break;
+                (*(_connection_base1<a1_t> *)(*i))(a1);
+                break;
             case 2:
                 (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
                 break;
@@ -983,7 +983,7 @@ public:
                     a4_t, a5_t, a6_t, a7_t, a8_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7, a8);
                 break;
             default:
-            	assert(false);
+                assert(false);
             }
         }
     }
