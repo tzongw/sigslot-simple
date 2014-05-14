@@ -14,3 +14,4 @@ Changes:
 
 Ps:
 5. 提供了一个或许有用的宏SIGNAL(在xsigslot.h中，用法见test.cpp)
+6. 发现一个隐患，在slot中调用disconnect会崩溃，用connections_list的副本可以避免，但会损失效率
