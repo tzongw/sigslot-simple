@@ -47,7 +47,7 @@ public:
     virtual has_slots *dest() const = 0;
     int argc() const { return m_argc; }
 private:
-    int m_argc;
+    const int m_argc;
 };
 
 class _signal_base
