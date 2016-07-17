@@ -40,14 +40,10 @@ private:
 
 class _connection_base
 {
-    SIGSLOT_DISABLE_COPY(_connection_base)
+    SIGSLOT_DEFAULT_CONSTRUCTOR(_connection_base)
 public:
-    _connection_base(int argc) : m_argc(argc) {}
     virtual ~_connection_base() {}
     virtual has_slots *dest() const = 0;
-    int argc() const { return m_argc; }
-private:
-    const int m_argc;
 };
 
 class _signal_base
@@ -98,7 +94,6 @@ inline has_slots::~has_slots()
 class _connection_base0 : public _connection_base
 {
 public:
-    _connection_base0() : _connection_base(0) {}
     virtual void operator()() const = 0;
 };
 
@@ -139,7 +134,6 @@ public:
     template <class Dest_t, class dest_t, class ret_t>
     void connect(const Dest_t *pclass, ret_t (dest_t::*pmemfun)() const)
     {
-        // Warning: 这里把const强转掉，不知有没有副作用。。。
         connect((Dest_t *)pclass, (ret_t (dest_t::*)())pmemfun);
     }
 
@@ -150,18 +144,11 @@ class signal0 : public _signal_base0, public has_slots
 {
 public:
     void operator()() const
-    {   // 或者这里用dynamic_cast？
+    {
         for (connections_list::const_iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base0 *)(*i))();
         }
     }
     typedef _signal_base0 base;
@@ -177,7 +164,6 @@ template <class a1_t>
 class _connection_base1 : public _connection_base
 {
 public:
-    _connection_base1() : _connection_base(1) {}
     virtual void operator()(a1_t a1) const = 0;
 };
 
@@ -239,17 +225,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base1<a1_t> *)(*i))(a1);
         }
     }
     typedef _signal_base1<a1_t> base;
@@ -260,7 +236,6 @@ template <class a1_t, class a2_t>
 class _connection_base2 : public _connection_base
 {
 public:
-    _connection_base2() : _connection_base(2) {}
     virtual void operator()(a1_t a1, a2_t a2) const = 0;
 };
 
@@ -323,20 +298,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
         }
     }
     typedef _signal_base2<a1_t, a2_t> base;
@@ -347,7 +309,6 @@ template <class a1_t, class a2_t, class a3_t>
 class _connection_base3 : public _connection_base
 {
 public:
-    _connection_base3() : _connection_base(3) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const = 0;
 };
 
@@ -411,23 +372,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
         }
     }
     typedef _signal_base3<a1_t, a2_t, a3_t> base;
@@ -438,7 +383,6 @@ template <class a1_t, class a2_t, class a3_t, class a4_t>
 class _connection_base4 : public _connection_base
 {
 public:
-    _connection_base4() : _connection_base(4) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const = 0;
 };
 
@@ -506,26 +450,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            case 4:
-                (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
         }
     }
     typedef _signal_base4<a1_t, a2_t, a3_t, a4_t> base;
@@ -536,7 +461,6 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t>
 class _connection_base5 : public _connection_base
 {
 public:
-    _connection_base5() : _connection_base(5) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const = 0;
 };
 
@@ -605,30 +529,8 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            case 4:
-                (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
-                break;
-            case 5:
-                (*(_connection_base5<a1_t, a2_t, a3_t,
-                    a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base5<a1_t, a2_t, a3_t,
+                a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
         }
     }
     typedef _signal_base5<a1_t, a2_t, a3_t, a4_t, a5_t> base;
@@ -639,7 +541,6 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t, class a6_t
 class _connection_base6 : public _connection_base
 {
 public:
-    _connection_base6() : _connection_base(6) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6) const = 0;
 };
@@ -710,34 +611,8 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            case 4:
-                (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
-                break;
-            case 5:
-                (*(_connection_base5<a1_t, a2_t, a3_t,
-                    a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
-                break;
-            case 6:
-                (*(_connection_base6<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base6<a1_t, a2_t, a3_t,
+                a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
         }
     }
     typedef _signal_base6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t> base;
@@ -749,7 +624,6 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base7 : public _connection_base
 {
 public:
-    _connection_base7() : _connection_base(7) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7) const = 0;
 };
@@ -826,38 +700,8 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            case 4:
-                (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
-                break;
-            case 5:
-                (*(_connection_base5<a1_t, a2_t, a3_t,
-                    a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
-                break;
-            case 6:
-                (*(_connection_base6<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
-                break;
-            case 7:
-                (*(_connection_base7<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base7<a1_t, a2_t, a3_t,
+                a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
         }
     }
     typedef _signal_base7<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t> base;
@@ -869,7 +713,6 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base8 : public _connection_base
 {
 public:
-    _connection_base8() : _connection_base(8) {}
     virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const = 0;
 };
@@ -949,42 +792,8 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
-            switch ((*i)->argc())
-            {
-            case 0:
-                (*(_connection_base0 *)(*i))();
-                break;
-            case 1:
-                (*(_connection_base1<a1_t> *)(*i))(a1);
-                break;
-            case 2:
-                (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
-                break;
-            case 3:
-                (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
-                break;
-            case 4:
-                (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
-                break;
-            case 5:
-                (*(_connection_base5<a1_t, a2_t, a3_t,
-                    a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
-                break;
-            case 6:
-                (*(_connection_base6<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
-                break;
-            case 7:
-                (*(_connection_base7<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
-                break;
-            case 8:
-                (*(_connection_base8<a1_t, a2_t, a3_t,
-                    a4_t, a5_t, a6_t, a7_t, a8_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7, a8);
-                break;
-            default:
-                assert(false);
-            }
+            (*(_connection_base8<a1_t, a2_t, a3_t,
+                a4_t, a5_t, a6_t, a7_t, a8_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7, a8);
         }
     }
     typedef _signal_base8<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t, a8_t> base;
