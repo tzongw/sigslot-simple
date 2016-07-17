@@ -56,7 +56,7 @@ class xsignal<void (a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t, a8_t)>
 
 } // namespace xsigslot
 
-// 下面这个宏可用来在类中声明信号
+// macro to define signal
 #define SIGNAL(Name, ...) \
 public: \
     xsigslot::xsignal<void (__VA_ARGS__)>::base *sig##Name() const { return &Name; } \

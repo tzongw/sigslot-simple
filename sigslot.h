@@ -84,8 +84,7 @@ protected:
 
 
 inline has_slots::~has_slots()
-{   // 这里不能用iterator来遍历，因为disconnect会调用_signal_disconnect
-    // m_senders会被修改，导致iterator失效
+{
     while (!m_senders.empty())
         (*m_senders.begin())->disconnect(this);
 }
