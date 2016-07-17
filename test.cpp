@@ -35,7 +35,7 @@ public:
     C()
     {
         a.sigChanged()->connect(this, &C::trace);  // base, const, less param
-        a.sigChanged()->connect(this, &C::delta);  // return int; 允许复制构造这个连接要怎么处理？
+        a.sigChanged()->connect(this, &C::delta);  // return int
         a.sigChanged()->connect(&MemberChanged);   // to signal
     }
     int delta(int left, int right) const
