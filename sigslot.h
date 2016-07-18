@@ -3,7 +3,6 @@
 
 #include <set>
 #include <list>
-#include <cassert>
 
 #define SIGSLOT_DISABLE_COPY(Class) \
 private: \
@@ -14,6 +13,12 @@ private: \
 public: \
     Class() {} \
 SIGSLOT_DISABLE_COPY(Class)
+
+#ifdef _MSC_VER
+    #define SIGSLOT_INVOKE __cdecl
+#else
+    #define SIGSLOT_INVOKE
+#endif
 
 namespace sigslot {
 
@@ -93,7 +98,7 @@ inline has_slots::~has_slots()
 class _connection_base0 : public _connection_base
 {
 public:
-    virtual void operator()() const = 0;
+    virtual void SIGSLOT_INVOKE operator()() const = 0;
 };
 
 template <class dest_t, class ret_t>
@@ -105,7 +110,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()() const
+    virtual void SIGSLOT_INVOKE operator()() const
     {
         (m_pobject->*m_pmemfun)();
     }
@@ -163,7 +168,7 @@ template <class a1_t>
 class _connection_base1 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1) const = 0;
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t>
@@ -175,7 +180,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1) const
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1) const
     {
         (m_pobject->*m_pmemfun)(a1);
     }
@@ -235,7 +240,7 @@ template <class a1_t, class a2_t>
 class _connection_base2 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2) const = 0;
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t>
@@ -247,7 +252,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2) const
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2) const
     {
         (m_pobject->*m_pmemfun)(a1, a2);
     }
@@ -308,7 +313,7 @@ template <class a1_t, class a2_t, class a3_t>
 class _connection_base3 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const = 0;
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t, class a3_t>
@@ -320,7 +325,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3) const
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3);
     }
@@ -382,7 +387,7 @@ template <class a1_t, class a2_t, class a3_t, class a4_t>
 class _connection_base4 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const = 0;
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t, class a3_t, class a4_t>
@@ -395,7 +400,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3, a4);
     }
@@ -460,7 +465,7 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t>
 class _connection_base5 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const = 0;
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const = 0;
 };
 
 template <class dest_t, class ret_t, class a1_t, class a2_t,
@@ -474,7 +479,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5);
     }
@@ -540,7 +545,7 @@ template <class a1_t, class a2_t, class a3_t, class a4_t, class a5_t, class a6_t
 class _connection_base6 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6) const = 0;
 };
 
@@ -555,7 +560,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6);
@@ -623,7 +628,7 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base7 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7) const = 0;
 };
 
@@ -639,7 +644,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7);
@@ -712,7 +717,7 @@ template <class a1_t, class a2_t, class a3_t, class a4_t,
 class _connection_base8 : public _connection_base
 {
 public:
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const = 0;
 };
 
@@ -728,7 +733,7 @@ public:
         m_pobject = pobject;
         m_pmemfun = pmemfun;
     }
-    virtual void operator()(a1_t a1, a2_t a2, a3_t a3,
+    virtual void SIGSLOT_INVOKE operator()(a1_t a1, a2_t a2, a3_t a3,
         a4_t a4, a5_t a5, a6_t a6, a7_t a7, a8_t a8) const
     {
         (m_pobject->*m_pmemfun)(a1, a2, a3, a4, a5, a6, a7, a8);
