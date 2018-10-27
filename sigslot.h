@@ -29,7 +29,8 @@ class has_slots
     SIGSLOT_DEFAULT_CONSTRUCTOR(has_slots)
     friend class _signal_base;
 public:
-    ~has_slots();
+    void free_slots();
+    ~has_slots() { free_slots(); }
 private:
     void _signal_connect(_signal_base *sender)
     {
@@ -88,7 +89,7 @@ protected:
 };
 
 
-inline has_slots::~has_slots()
+inline void has_slots::free_slots()
 {
     while (!m_senders.empty())
         (*m_senders.begin())->disconnect(this);
