@@ -56,5 +56,9 @@ int main()
     c.setA(1);
     c.sigMemberChanged()->disconnect(&c);
     c.setA(10);
+    c.sigMemberChanged()->connect(&c, &C::what);
+    c.setA(1);
+    c.sigMemberChanged()->disconnect(&c);
+    c.setA(10);
     return 0;
 }

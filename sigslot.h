@@ -61,6 +61,7 @@ public:
         for (connections_list::const_iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*i)->dest()->_signal_disconnect(this);
             delete *i;
         }
@@ -68,18 +69,30 @@ public:
     void disconnect(const has_slots *pclass)
     {
         for (connections_list::iterator i = m_connected_slots.begin();
-            i != m_connected_slots.end();)
+            i != m_connected_slots.end(); ++i)
         {
-            if ((*i)->dest() == pclass)
+            if (*i && (*i)->dest() == pclass)
             {
                 (*i)->dest()->_signal_disconnect(this);
                 delete *i;
-                i = m_connected_slots.erase(i);
+                *i = NULL;
             }
-            else ++i;
         }
     }
 protected:
+    void _insert_connection(_connection_base *connection)
+    {
+        for (connections_list::reverse_iterator i = m_connected_slots.rbegin();
+            i != m_connected_slots.rend(); ++i)
+        {
+            if (*i == NULL)
+            {
+                *i = connection;
+                return;
+            }
+        }
+        m_connected_slots.push_back(connection);
+    }
     void _connect_to_has_slots(has_slots *pclass)
     {
         pclass->_signal_connect(this);
@@ -133,7 +146,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)())
     {
         _connect_to_has_slots(pclass);
-        m_connected_slots.push_back(new _connection0<Dest_t, ret_t>(pclass, pmemfun));
+        _insert_connection(new _connection0<Dest_t, ret_t>(pclass, pmemfun));
     }
 
     template <class Dest_t, class dest_t, class ret_t>
@@ -153,6 +166,7 @@ public:
         for (connections_list::const_iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base0 *)(*i))();
         }
     }
@@ -205,7 +219,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t))
     {
         _connect_to_has_slots(pclass);
-        m_connected_slots.push_back(new _connection1<Dest_t, ret_t, a1_t>(pclass, pmemfun));
+        _insert_connection(new _connection1<Dest_t, ret_t, a1_t>(pclass, pmemfun));
     }
 
     template <class Dest_t, class dest_t, class ret_t>
@@ -230,6 +244,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base1<a1_t> *)(*i))(a1);
         }
     }
@@ -277,7 +292,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t, a2_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(
+        this->_insert_connection(
             new _connection2<Dest_t, ret_t, a1_t, a2_t>(pclass, pmemfun));
     }
 
@@ -303,6 +318,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
         }
     }
@@ -350,7 +366,7 @@ public:
     void connect(Dest_t *pclass, ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(
+        this->_insert_connection(
             new _connection3<Dest_t, ret_t, a1_t, a2_t, a3_t>(pclass, pmemfun));
     }
 
@@ -377,6 +393,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
         }
     }
@@ -426,7 +443,7 @@ public:
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(
+        this->_insert_connection(
             new _connection4<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t>(pclass, pmemfun));
     }
@@ -455,6 +472,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
         }
     }
@@ -505,7 +523,7 @@ public:
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t, a5_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(
+        this->_insert_connection(
             new _connection5<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t, a5_t>(pclass, pmemfun));
     }
@@ -534,6 +552,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base5<a1_t, a2_t, a3_t,
                 a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
         }
@@ -587,7 +606,7 @@ public:
         ret_t (dest_t::*pmemfun)(a1_t, a2_t, a3_t, a4_t, a5_t, a6_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(new _connection6<Dest_t,
+        this->_insert_connection(new _connection6<Dest_t,
             ret_t, a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>(pclass, pmemfun));
     }
 
@@ -616,6 +635,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base6<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
         }
@@ -673,7 +693,7 @@ public:
         a2_t, a3_t, a4_t, a5_t, a6_t, a7_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(new _connection7<Dest_t, ret_t, a1_t, a2_t,
+        this->_insert_connection(new _connection7<Dest_t, ret_t, a1_t, a2_t,
             a3_t, a4_t, a5_t, a6_t, a7_t>(pclass, pmemfun));
     }
 
@@ -705,6 +725,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base7<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
         }
@@ -764,7 +785,7 @@ public:
         a2_t, a3_t, a4_t, a5_t, a6_t, a7_t, a8_t))
     {
         this->_connect_to_has_slots(pclass);
-        this->m_connected_slots.push_back(new _connection8<Dest_t, ret_t, a1_t, a2_t,
+        this->_insert_connection(new _connection8<Dest_t, ret_t, a1_t, a2_t,
             a3_t, a4_t, a5_t, a6_t, a7_t, a8_t>(pclass, pmemfun));
     }
 
@@ -797,6 +818,7 @@ public:
         for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
+            if (*i == NULL) continue;
             (*(_connection_base8<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t, a7_t, a8_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7, a8);
         }
