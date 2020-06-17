@@ -150,9 +150,8 @@ class signal0 : public _signal_base0, public has_slots
 public:
     void operator()() const
     {
-        connections_list connected_slots = m_connected_slots;
-        for (connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (connections_list::const_iterator i = m_connected_slots.begin();
+            i != m_connected_slots.end(); ++i)
         {
             (*(_connection_base0 *)(*i))();
         }
@@ -228,9 +227,8 @@ class signal1 : public _signal_base1<a1_t>, public has_slots
 public:
     void operator()(a1_t a1) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base1<a1_t> *)(*i))(a1);
         }
@@ -302,9 +300,8 @@ class signal2 : public _signal_base2<a1_t, a2_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base2<a1_t, a2_t> *)(*i))(a1, a2);
         }
@@ -377,9 +374,8 @@ class signal3 : public _signal_base3<a1_t, a2_t, a3_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base3<a1_t, a2_t, a3_t> *)(*i))(a1, a2, a3);
         }
@@ -456,9 +452,8 @@ class signal4 : public _signal_base4<a1_t, a2_t, a3_t, a4_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base4<a1_t, a2_t, a3_t, a4_t> *)(*i))(a1, a2, a3, a4);
         }
@@ -536,9 +531,8 @@ class signal5 : public _signal_base5<a1_t, a2_t, a3_t, a4_t, a5_t>, public has_s
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base5<a1_t, a2_t, a3_t,
                 a4_t, a5_t> *)(*i))(a1, a2, a3, a4, a5);
@@ -619,9 +613,8 @@ class signal6 : public _signal_base6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>,
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5, a6_t a6) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base6<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t> *)(*i))(a1, a2, a3, a4, a5, a6);
@@ -709,9 +702,8 @@ public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4,
         a5_t a5, a6_t a6, a7_t a7) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base7<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t, a7_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7);
@@ -802,9 +794,8 @@ public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4,
         a5_t a5, a6_t a6, a7_t a7, a8_t a8) const
     {
-        typename base::connections_list connected_slots = this->m_connected_slots;
-        for (typename base::connections_list::const_iterator i = connected_slots.begin();
-            i != connected_slots.end(); ++i)
+        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+            i != this->m_connected_slots.end(); ++i)
         {
             (*(_connection_base8<a1_t, a2_t, a3_t,
                 a4_t, a5_t, a6_t, a7_t, a8_t> *)(*i))(a1, a2, a3, a4, a5, a6, a7, a8);
