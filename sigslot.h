@@ -82,8 +82,8 @@ public:
 protected:
     void _insert_connection(_connection_base *connection)
     {
-        for (connections_list::reverse_iterator i = m_connected_slots.rbegin();
-            i != m_connected_slots.rend(); ++i)
+        for (connections_list::iterator i = m_connected_slots.begin();
+            i != m_connected_slots.end(); ++i)
         {
             if (*i == NULL)
             {
