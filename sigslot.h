@@ -2,7 +2,7 @@
 #define SIGSLOT_H__
 
 #include <set>
-#include <list>
+#include <vector>
 
 #define SIGSLOT_DISABLE_COPY(Class) \
 private: \
@@ -58,7 +58,7 @@ class _signal_base
 public:
     ~_signal_base()
     {
-        for (connections_list::const_iterator i = m_connected_slots.begin();
+        for (connections::const_iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -68,7 +68,7 @@ public:
     }
     void disconnect(const has_slots *pclass)
     {
-        for (connections_list::iterator i = m_connected_slots.begin();
+        for (connections::iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
             if (*i && (*i)->dest() == pclass)
@@ -82,7 +82,7 @@ public:
 protected:
     void _insert_connection(_connection_base *connection)
     {
-        for (connections_list::iterator i = m_connected_slots.begin();
+        for (connections::iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
             if (*i == NULL)
@@ -97,8 +97,8 @@ protected:
     {
         pclass->_signal_connect(this);
     }
-    typedef std::list<_connection_base *> connections_list;
-    connections_list m_connected_slots;
+    typedef std::vector<_connection_base *> connections;
+    connections m_connected_slots;
 };
 
 
@@ -163,7 +163,7 @@ class signal0 : public _signal_base0, public has_slots
 public:
     void operator()() const
     {
-        for (connections_list::const_iterator i = m_connected_slots.begin();
+        for (connections::const_iterator i = m_connected_slots.begin();
             i != m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -241,7 +241,7 @@ class signal1 : public _signal_base1<a1_t>, public has_slots
 public:
     void operator()(a1_t a1) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -315,7 +315,7 @@ class signal2 : public _signal_base2<a1_t, a2_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -390,7 +390,7 @@ class signal3 : public _signal_base3<a1_t, a2_t, a3_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -469,7 +469,7 @@ class signal4 : public _signal_base4<a1_t, a2_t, a3_t, a4_t>, public has_slots
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -549,7 +549,7 @@ class signal5 : public _signal_base5<a1_t, a2_t, a3_t, a4_t, a5_t>, public has_s
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -632,7 +632,7 @@ class signal6 : public _signal_base6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>,
 public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4, a5_t a5, a6_t a6) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -722,7 +722,7 @@ public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4,
         a5_t a5, a6_t a6, a7_t a7) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
@@ -815,7 +815,7 @@ public:
     void operator()(a1_t a1, a2_t a2, a3_t a3, a4_t a4,
         a5_t a5, a6_t a6, a7_t a7, a8_t a8) const
     {
-        for (typename base::connections_list::const_iterator i = this->m_connected_slots.begin();
+        for (typename base::connections::const_iterator i = this->m_connected_slots.begin();
             i != this->m_connected_slots.end(); ++i)
         {
             if (*i == NULL) continue;
