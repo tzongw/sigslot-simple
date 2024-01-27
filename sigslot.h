@@ -2,7 +2,7 @@
 #define SIGSLOT_H__
 
 #include <set>
-#include <vector>
+#include <list>
 
 #define SIGSLOT_DISABLE_COPY(Class) \
 private: \
@@ -97,7 +97,7 @@ protected:
     {
         pclass->_signal_connect(this);
     }
-    typedef std::vector<_connection_base *> connections;
+    typedef std::list<_connection_base *> connections;
     connections m_connected_slots;
 };
 
