@@ -155,7 +155,7 @@ public:
         connect((Dest_t *)pclass, (ret_t (dest_t::*)())pmemfun);
     }
 
-    void connect(signal0 *pclass);
+    void connect(const signal0 *pclass);
 };
 
 class signal0 : public _signal_base0, public has_slots
@@ -173,7 +173,7 @@ public:
     typedef _signal_base0 base;
 };
 
-inline void _signal_base0::connect(signal0 *pclass)
+inline void _signal_base0::connect(const signal0 *pclass)
 {
     connect(pclass, &signal0::operator());
 }
@@ -228,7 +228,7 @@ public:
         connect((Dest_t *)pclass, (ret_t (dest_t::*)(a1_t))pmemfun);
     }
 
-    void connect(signal1<a1_t> *pclass)
+    void connect(const signal1<a1_t> *pclass)
     {
         connect(pclass, &signal1<a1_t>::operator());
     }
@@ -302,7 +302,7 @@ public:
         connect((Dest_t *)pclass, (ret_t (dest_t::*)(a1_t, a2_t))pmemfun);
     }
 
-    void connect(signal2<a1_t, a2_t> *pclass)
+    void connect(const signal2<a1_t, a2_t> *pclass)
     {
         connect(pclass, &signal2<a1_t, a2_t>::operator());
     }
@@ -377,7 +377,7 @@ public:
         connect((Dest_t *)pclass, (ret_t (dest_t::*)(a1_t, a2_t, a3_t))pmemfun);
     }
 
-    void connect(signal3<a1_t, a2_t, a3_t> *pclass)
+    void connect(const signal3<a1_t, a2_t, a3_t> *pclass)
     {
         connect(pclass, &signal3<a1_t, a2_t, a3_t>::operator());
     }
@@ -456,7 +456,7 @@ public:
             (ret_t (dest_t::*)(a1_t, a2_t, a3_t, a4_t))pmemfun);
     }
 
-    void connect(signal4<a1_t, a2_t, a3_t, a4_t> *pclass)
+    void connect(const signal4<a1_t, a2_t, a3_t, a4_t> *pclass)
     {
         connect(pclass, &signal4<a1_t, a2_t, a3_t, a4_t>::operator());
     }
@@ -536,7 +536,7 @@ public:
             (ret_t (dest_t::*)(a1_t, a2_t, a3_t, a4_t, a5_t))pmemfun);
     }
 
-    void connect(signal5<a1_t, a2_t, a3_t, a4_t, a5_t> *pclass)
+    void connect(const signal5<a1_t, a2_t, a3_t, a4_t, a5_t> *pclass)
     {
         connect(pclass, &signal5<a1_t, a2_t, a3_t, a4_t, a5_t>::operator());
     }
@@ -618,7 +618,7 @@ public:
             (ret_t (dest_t::*)(a1_t, a2_t, a3_t, a4_t, a5_t, a6_t))pmemfun);
     }
 
-    void connect(signal6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t> *pclass)
+    void connect(const signal6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t> *pclass)
     {
         connect(pclass, &signal6<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t>::operator());
     }
@@ -705,7 +705,7 @@ public:
             a4_t, a5_t, a6_t, a7_t))pmemfun);
     }
 
-    void connect(signal7<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t> *pclass)
+    void connect(const signal7<a1_t, a2_t, a3_t, a4_t, a5_t, a6_t, a7_t> *pclass)
     {
         connect(pclass, &signal7<a1_t, a2_t, a3_t, a4_t,
             a5_t, a6_t, a7_t>::operator());
@@ -797,7 +797,7 @@ public:
             a4_t, a5_t, a6_t, a7_t, a8_t))pmemfun);
     }
 
-    void connect(signal8<a1_t, a2_t, a3_t, a4_t,
+    void connect(const signal8<a1_t, a2_t, a3_t, a4_t,
         a5_t, a6_t, a7_t, a8_t> *pclass)
     {
         connect(pclass, &signal8<a1_t, a2_t, a3_t, a4_t,
